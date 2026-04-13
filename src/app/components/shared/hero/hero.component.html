@@ -1,0 +1,60 @@
+<section class="hero">
+  <div class="hero-bg">
+    <div class="gradient-orb orb-1" [style.transform]="'translate(' + mouseX() * 0.5 + 'px, ' + mouseY() * 0.5 + 'px)'"></div>
+    <div class="gradient-orb orb-2" [style.transform]="'translate(' + mouseX() * -0.3 + 'px, ' + mouseY() * -0.3 + 'px)'"></div>
+    <div class="gradient-orb orb-3" [style.transform]="'translate(' + mouseX() * 0.2 + 'px, ' + mouseY() * 0.2 + 'px)'"></div>
+    <div class="grid-pattern"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge fade-in">
+      <span class="badge-dot"></span>
+      CA | CFA | Advisor
+    </div>
+
+    <h1 class="hero-title fade-in" style="transition-delay: 0.1s">
+      <span class="title-line">Deal Dissekt</span>
+      <span class="title-line gradient-text">Financial Clarity</span>
+    </h1>
+
+    <p class="hero-subtitle fade-in" style="transition-delay: 0.2s">
+      One stop solution to all financial curiosity - minus the jargon!
+    </p>
+
+    <div class="hero-cta fade-in" style="transition-delay: 0.3s">
+      <a routerLink="/portfolio" class="btn btn-primary">
+        View Portfolio
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href="#latest-posts" class="btn btn-secondary">
+        Read Articles
+      </a>
+    </div>
+
+    <div class="hero-stats fade-in" style="transition-delay: 0.4s">
+      <div class="stat">
+        <span class="stat-number">50+</span>
+        <span class="stat-label">Articles Published</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-number">5+</span>
+        <span class="stat-label">Years Experience</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-number">10K+</span>
+        <span class="stat-label">Monthly Readers</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator fade-in" style="transition-delay: 0.5s">
+    <span>Scroll to explore</span>
+    <div class="scroll-line">
+      <div class="scroll-dot"></div>
+    </div>
+  </div>
+</section>
