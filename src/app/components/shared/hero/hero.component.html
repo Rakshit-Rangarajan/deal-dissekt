@@ -1,60 +1,101 @@
 <section class="hero">
+  <!-- Subtle background texture -->
   <div class="hero-bg">
-    <div class="gradient-orb orb-1" [style.transform]="'translate(' + mouseX() * 0.5 + 'px, ' + mouseY() * 0.5 + 'px)'"></div>
-    <div class="gradient-orb orb-2" [style.transform]="'translate(' + mouseX() * -0.3 + 'px, ' + mouseY() * -0.3 + 'px)'"></div>
-    <div class="gradient-orb orb-3" [style.transform]="'translate(' + mouseX() * 0.2 + 'px, ' + mouseY() * 0.2 + 'px)'"></div>
-    <div class="grid-pattern"></div>
+    <div class="bg-texture"></div>
+    <div class="bg-vignette"></div>
   </div>
 
-  <div class="hero-content">
-    <div class="hero-badge fade-in">
-      <span class="badge-dot"></span>
-      CA | CFA | Advisor
-    </div>
+  <!-- Content wrapper -->
+  <div class="hero-inner container">
 
-    <h1 class="hero-title fade-in" style="transition-delay: 0.1s">
-      <span class="title-line">Deal Dissekt</span>
-      <span class="title-line gradient-text">Financial Clarity</span>
-    </h1>
-
-    <p class="hero-subtitle fade-in" style="transition-delay: 0.2s">
-      One stop solution to all financial curiosity - minus the jargon!
-    </p>
-
-    <div class="hero-cta fade-in" style="transition-delay: 0.3s">
-      <a routerLink="/portfolio" class="btn btn-primary">
-        View Portfolio
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
-      </a>
-      <a href="#latest-posts" class="btn btn-secondary">
-        Read Articles
-      </a>
-    </div>
-
-    <div class="hero-stats fade-in" style="transition-delay: 0.4s">
-      <div class="stat">
-        <span class="stat-number">50+</span>
-        <span class="stat-label">Articles Published</span>
+    <!-- LEFT: editorial text column -->
+    <div class="hero-left">
+      <div class="hero-credential fade-in">
+        <span class="cred-dot"></span>
+        <span>CA &bull; CFA Charterholder &bull; M&amp;A Advisor &bull; EY</span>
       </div>
-      <div class="stat-divider"></div>
-      <div class="stat">
-        <span class="stat-number">5+</span>
-        <span class="stat-label">Years Experience</span>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat">
-        <span class="stat-number">10K+</span>
-        <span class="stat-label">Monthly Readers</span>
-      </div>
-    </div>
-  </div>
 
-  <div class="scroll-indicator fade-in" style="transition-delay: 0.5s">
-    <span>Scroll to explore</span>
-    <div class="scroll-line">
-      <div class="scroll-dot"></div>
+      <h1 class="hero-heading fade-in" style="transition-delay:0.1s">
+        Financial clarity,<br>
+        <em>without the noise.</em>
+      </h1>
+
+      <p class="hero-subtext fade-in" style="transition-delay:0.2s">
+        High-stakes deal analysis, M&amp;A breakdowns, and market insights —
+        written by a practitioner, for the curious.
+      </p>
+
+      <div class="hero-cta fade-in" style="transition-delay:0.3s">
+        <a routerLink="/about" class="btn btn-primary">
+          Meet the Author
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="#latest-posts" class="btn btn-secondary">
+          Browse Articles
+        </a>
+      </div>
+
+      <!-- Stats strip -->
+      <div class="hero-stats fade-in" style="transition-delay:0.4s">
+        <div class="stat">
+          <span class="stat-number">50+</span>
+          <span class="stat-label">Articles</span>
+        </div>
+        <div class="stat-rule"></div>
+        <div class="stat">
+          <span class="stat-number">5+</span>
+          <span class="stat-label">Yrs Experience</span>
+        </div>
+        <div class="stat-rule"></div>
+        <div class="stat">
+          <span class="stat-number">10K+</span>
+          <span class="stat-label">Monthly Readers</span>
+        </div>
+      </div>
     </div>
+
+    <!-- RIGHT: live ticker + quote cards -->
+    <div class="hero-right fade-in" style="transition-delay:0.25s">
+      <div class="ticker-strip">
+        <div class="ticker-label">
+          <span class="ticker-dot"></span>
+          Now Reading
+        </div>
+        <!-- Scrolling topic pills -->
+        <div class="ticker-track" aria-hidden="true">
+          <div class="ticker-inner">
+            @for (topic of tickerTopics; track topic) {
+              <span class="ticker-pill">{{ topic }}</span>
+            }
+            @for (topic of tickerTopics; track topic) {
+              <span class="ticker-pill">{{ topic }}</span>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Quote cards stack -->
+      <div class="quote-stack">
+        <div class="quote-card quote-card--1">
+          <div class="qc-icon">&#8220;</div>
+          <p>"Understanding the deal structure is worth more than understanding the tax code."</p>
+          <span class="qc-tag">Deal Insights</span>
+        </div>
+        <div class="quote-card quote-card--2">
+          <div class="qc-icon">&#8220;</div>
+          <p>"Every PE transaction tells a story. Let's dissect it."</p>
+          <span class="qc-tag">M&amp;A Analysis</span>
+        </div>
+      </div>
+
+      <!-- Scroll cue -->
+      <div class="scroll-cue">
+        <div class="scroll-line-anim"></div>
+        <span>scroll</span>
+      </div>
+    </div>
+
   </div>
 </section>

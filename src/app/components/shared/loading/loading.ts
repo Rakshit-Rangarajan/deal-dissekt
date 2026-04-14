@@ -15,7 +15,6 @@ import { CommonModule } from '@angular/common';
         <div class="loading-bar">
           <div class="bar-progress"></div>
         </div>
-        <p class="skip-hint">Press <span>ENTER</span> to dive in</p>
       </div>
       <div class="loading-bg">
         <div class="grid-layer"></div>
@@ -29,7 +28,7 @@ import { CommonModule } from '@angular/common';
       position: fixed;
       inset: 0;
       z-index: 9999;
-      background: #0F0F1A;
+      background: #0D0D0B;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -49,7 +48,7 @@ import { CommonModule } from '@angular/common';
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 40px;
+      gap: 36px;
     }
 
     .logo-wrapper {
@@ -58,7 +57,7 @@ import { CommonModule } from '@angular/common';
     }
 
     .loader-logo {
-      height: 100px;
+      height: 88px;
       width: auto;
       position: relative;
       z-index: 1;
@@ -66,46 +65,27 @@ import { CommonModule } from '@angular/common';
 
     .logo-glow {
       position: absolute;
-      inset: -20px;
-      background: var(--primary);
-      filter: blur(40px);
-      opacity: 0.3;
+      inset: -24px;
+      background: #C8A96E;
+      filter: blur(48px);
+      opacity: 0.2;
       border-radius: 50%;
-      animation: pulse-glow 2s infinite;
+      animation: pulse-glow 2.5s infinite;
     }
 
     .loading-bar {
-      width: 200px;
-      height: 4px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 2px;
+      width: 180px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 1px;
       overflow: hidden;
       
       .bar-progress {
         width: 100%;
         height: 100%;
-        background: var(--gradient-primary);
+        background: linear-gradient(90deg, #C8A96E, #D9C094);
         transform: translateX(-100%);
         animation: progress-fill 3s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-      }
-    }
-
-    .skip-hint {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      opacity: 0;
-      animation: fadeIn 0.5s ease 1.5s forwards;
-
-      span {
-        color: var(--primary-light);
-        font-weight: 700;
-        padding: 4px 8px;
-        background: rgba(108, 60, 225, 0.1);
-        border: 1px solid rgba(108, 60, 225, 0.3);
-        border-radius: 4px;
-        margin: 0 4px;
       }
     }
 
@@ -117,29 +97,28 @@ import { CommonModule } from '@angular/common';
         position: absolute;
         inset: 0;
         background-image: 
-          linear-gradient(rgba(108, 60, 225, 0.05) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(108, 60, 225, 0.05) 1px, transparent 1px);
-        background-size: 80px 80px;
+          repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(200,169,110,0.03) 59px, rgba(200,169,110,0.03) 60px),
+          repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(200,169,110,0.02) 59px, rgba(200,169,110,0.02) 60px);
       }
 
       .orb {
         position: absolute;
-        width: 600px;
-        height: 600px;
+        width: 500px;
+        height: 500px;
         border-radius: 50%;
         filter: blur(150px);
-        opacity: 0.15;
+        opacity: 0.10;
       }
 
       .orb-1 {
-        background: var(--primary);
+        background: #C8A96E;
         top: -100px;
         left: -100px;
         animation: orb-float 10s infinite alternate;
       }
 
       .orb-2 {
-        background: var(--secondary);
+        background: #D94F3B;
         bottom: -100px;
         right: -100px;
         animation: orb-float 8s infinite alternate-reverse;
@@ -147,7 +126,7 @@ import { CommonModule } from '@angular/common';
     }
 
     @keyframes logo-entrance {
-      from { transform: scale(0.5) translateY(20px); opacity: 0; }
+      from { transform: scale(0.7) translateY(16px); opacity: 0; }
       to { transform: scale(1) translateY(0); opacity: 1; }
     }
 
@@ -158,7 +137,12 @@ import { CommonModule } from '@angular/common';
 
     @keyframes orb-float {
       from { transform: translate(0, 0); }
-      to { transform: translate(50px, 50px); }
+      to { transform: translate(40px, 40px); }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.15; }
+      50% { opacity: 0.3; }
     }
 
     @keyframes fadeIn {
@@ -186,7 +170,7 @@ export class LoadingComponent implements OnInit {
 
   private finishLoading(): void {
     if (this.isFadingOut()) return;
-    
+
     this.isFadingOut.set(true);
     setTimeout(() => {
       this.isVisible.set(false);

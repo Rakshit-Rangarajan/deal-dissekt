@@ -55,8 +55,9 @@ export class AboutComponent implements OnInit, AfterViewInit {
     { icon: 'book', label: 'Financial Research' },
     { icon: 'globe', label: 'Market Analysis' },
     { icon: 'chart', label: 'Valuations' },
-    { icon: 'briefcase', label: 'Deal Structuring' },
-    { icon: 'trending-up', label: 'PE Insights' },
+    { icon: 'structure', label: 'Deal Structuring' },
+    { icon: 'pe-graph', label: 'PE Insights' },
+    { icon: 'plane', label: 'Travel' },
     { icon: 'code', label: 'Data Analytics' }
   ];
 

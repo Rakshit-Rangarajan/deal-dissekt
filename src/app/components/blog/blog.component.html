@@ -2,114 +2,112 @@
   <app-hero></app-hero>
 }
 
-<section class="featured-section section" id="featured">
-  <div class="container">
-    @if (selectedCategory() === 'All') {
+<!-- ─── FEATURED SECTION ──────────────────────────────────────── -->
+@if (selectedCategory() === 'All') {
+  <section class="featured-section section" id="featured">
+    <div class="container">
       <div class="section-header fade-in">
-        <span class="section-label">Featured</span>
-        <h2 class="section-title">Editor's Picks</h2>
-        <p class="section-subtitle">Handpicked articles showcasing deep financial insights and market analysis</p>
+        <span class="section-label">Editor's Picks</span>
+        <h2 class="section-title">Featured Articles</h2>
+        <p class="section-subtitle">
+          Handpicked deep-dives into the deals and decisions that shape Indian finance.
+        </p>
       </div>
-    }
 
-    @if (selectedCategory() === 'All') {
       <div class="featured-grid">
         @for (post of featuredPosts(); track post.id; let i = $index) {
-          <article class="featured-card scale-in" [style.transition-delay]="(i * 0.1) + 's'">
-            <div class="card-image">
-              <img [src]="post.imageUrl" [alt]="post.title" loading="lazy">
-              <span class="category-badge">{{ post.category }}</span>
-            </div>
-            <div class="card-content">
+          <article class="featured-card scale-in" [class.featured-card--large]="i === 0" [style.transition-delay]="(i * 0.12) + 's'">
+            <a [routerLink]="['/blog', post.id]" class="card-image-link">
+              <div class="card-image">
+                <img [src]="post.imageUrl" [alt]="post.title" loading="lazy">
+                <div class="card-image-overlay"></div>
+              </div>
+            </a>
+            <div class="card-body">
               <div class="card-meta">
-                <span class="read-time">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polyline points="12,6 12,12 16,14"/>
-                  </svg>
-                  {{ post.readTime }}
-                </span>
-                <span class="date">{{ formatDate(post.publishDate) }}</span>
+                <span class="meta-category">{{ post.category }}</span>
+                <span class="meta-sep">·</span>
+                <span class="meta-date">{{ formatDate(post.publishDate) }}</span>
+                <span class="meta-sep">·</span>
+                <span class="meta-read">{{ post.readTime }}</span>
               </div>
-              <h3 class="card-title">{{ post.title }}</h3>
-              <p class="card-excerpt">{{ post.excerpt }}</p>
-              <div class="card-tags">
-                @for (tag of post.tags; track tag) {
-                  <span class="tag">{{ tag }}</span>
-                }
-              </div>
-              <a [routerLink]="['/blog', post.id]" class="read-more">
-                Read Article
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
+              <a [routerLink]="['/blog', post.id]">
+                <h3 class="card-title">{{ post.title }}</h3>
               </a>
+              <p class="card-excerpt">{{ post.excerpt }}</p>
+              <div class="card-footer">
+                <div class="card-tags">
+                  @for (tag of post.tags.slice(0, 2); track tag) {
+                    <span class="tag">{{ tag }}</span>
+                  }
+                </div>
+                <a [routerLink]="['/blog', post.id]" class="card-link">
+                  Read
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </a>
+              </div>
             </div>
           </article>
         }
       </div>
-    }
-  </div>
-</section>
+    </div>
+  </section>
+}
 
+<!-- ─── ALL POSTS SECTION ─────────────────────────────────────── -->
 <section class="posts-section section" id="latest-posts">
   <div class="container">
-    <div class="section-header fade-in">
-      <span class="section-label">Latest Articles</span>
-      <h2 class="section-title">
-        @if (selectedCategory() === 'All') {
-          All Insights
-        } @else {
-          {{ selectedCategory() }}
-        }
-      </h2>
-      <p class="section-subtitle">
-        @if (selectedCategory() === 'All') {
-          Explore our complete collection of financial insights and market analysis
-        } @else {
-          In-depth articles and expert analysis on {{ selectedCategory() }}
-        }
-      </p>
-    </div>
+    <div class="posts-section-header fade-in">
+      <div class="posts-title-row">
+        <span class="section-label">Latest Articles</span>
+        <h2 class="section-title">
+          @if (selectedCategory() === 'All') { All Insights }
+          @else { {{ selectedCategory() }} }
+        </h2>
+      </div>
 
-    <div class="category-filter fade-in">
-      @for (category of categories(); track category) {
-        <button 
-          class="filter-btn" 
-          [class.active]="selectedCategory() === category"
-          (click)="filterByCategory(category)">
-          {{ category }}
-        </button>
-      }
+      <!-- Tab-style category filters -->
+      <div class="category-tabs fade-in">
+        @for (category of categories(); track category) {
+          <button
+            class="tab-btn"
+            [class.active]="selectedCategory() === category"
+            (click)="filterByCategory(category)">
+            {{ category }}
+          </button>
+        }
+      </div>
     </div>
 
     <div class="posts-grid">
       @for (post of filteredPosts; track post.id; let i = $index) {
-        <article class="post-card slide-right" [style.transition-delay]="(i * 0.1) + 's'">
-          <div class="post-image">
-            <img [src]="post.imageUrl" [alt]="post.title" loading="lazy">
-            <div class="post-overlay">
-              <span class="read-time-overlay">{{ post.readTime }}</span>
+        <article class="post-card fade-in" [style.transition-delay]="(i * 0.08) + 's'">
+          <a [routerLink]="['/blog', post.id]" class="post-image-link">
+            <div class="post-image">
+              <img [src]="post.imageUrl" [alt]="post.title" loading="lazy">
             </div>
-          </div>
-          <div class="post-content">
+          </a>
+          <div class="post-body">
             <div class="post-meta">
-              <span class="category">{{ post.category }}</span>
-              <span class="date">{{ formatDate(post.publishDate) }}</span>
+              <span class="post-category">{{ post.category }}</span>
+              <span class="post-date">{{ formatDate(post.publishDate) }}</span>
             </div>
-            <h3 class="post-title">{{ post.title }}</h3>
+            <a [routerLink]="['/blog', post.id]">
+              <h3 class="post-title">{{ post.title }}</h3>
+            </a>
             <p class="post-excerpt">{{ post.excerpt }}</p>
             <div class="post-footer">
-              <div class="post-tags">
-                @for (tag of post.tags.slice(0, 2); track tag) {
-                  <span class="tag-sm">{{ tag }}</span>
-                }
-              </div>
-              <a [routerLink]="['/blog', post.id]" class="post-link">
-                Read
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
+              <span class="post-read-time">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12,6 12,12 16,14"/>
                 </svg>
+                {{ post.readTime }}
+              </span>
+              <a [routerLink]="['/blog', post.id]" class="post-link">
+                Read Article →
               </a>
             </div>
           </div>
@@ -119,21 +117,33 @@
   </div>
 </section>
 
-<section class="newsletter-section section">
+<!-- ─── NEWSLETTER SECTION ────────────────────────────────────── -->
+<section class="newsletter-section">
   <div class="container">
-    <div class="newsletter-card fade-in">
-      <div class="newsletter-content">
-        <h2>Stay Updated</h2>
-        <p>Subscribe to receive the latest financial insights and market analysis directly in your inbox.</p>
+    <div class="newsletter-inner fade-in">
+      <div class="newsletter-text">
+        <span class="section-label">Stay Sharp</span>
+        <h2 class="newsletter-heading">No fluff.<br><em>Just the deals that matter.</em></h2>
+        <p>
+          Join thousands of finance professionals who read Deal Dissekt for
+          practitioner-level insights into M&amp;A, PE, and Transaction Tax.
+        </p>
       </div>
       <form class="newsletter-form" (submit)="$event.preventDefault()">
-        <input type="email" placeholder="Enter your email" required>
-        <button type="submit" class="btn btn-primary">
-          Subscribe
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
-          </svg>
-        </button>
+        <div class="form-group">
+          <input
+            type="email"
+            placeholder="your@email.com"
+            required
+            id="newsletter-email">
+          <button type="submit" class="btn btn-primary">
+            Subscribe
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+            </svg>
+          </button>
+        </div>
+        <p class="form-note">No spam. Unsubscribe anytime.</p>
       </form>
     </div>
   </div>

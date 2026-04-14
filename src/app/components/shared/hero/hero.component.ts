@@ -10,24 +10,19 @@ import { RouterModule } from '@angular/router';
   styleUrl: './hero.component.scss'
 })
 export class HeroComponent implements OnInit, OnDestroy {
-  mouseX = signal(0);
-  mouseY = signal(0);
-  
-  private cleanup: (() => void) | null = null;
+  tickerTopics: string[] = [
+    'M&A Structures',
+    'PE Fund Analysis',
+    'SEBI Regulations',
+    'Tax Efficiency',
+    'Deal Valuation',
+    'Group Restructuring',
+    'Capital Markets',
+    'Startup Funding',
+    'IBC / Insolvency',
+    'Transfer Pricing',
+  ];
 
   ngOnInit(): void {}
-
-  ngOnDestroy(): void {
-    if (this.cleanup) {
-      this.cleanup();
-    }
-  }
-
-  @HostListener('mousemove', ['$event'])
-  onMouseMove(event: MouseEvent): void {
-    const x = (event.clientX / window.innerWidth - 0.5) * 20;
-    const y = (event.clientY / window.innerHeight - 0.5) * 20;
-    this.mouseX.set(x);
-    this.mouseY.set(y);
-  }
+  ngOnDestroy(): void {}
 }
